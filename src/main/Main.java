@@ -17,7 +17,7 @@ public class Main {
 
             System.out.println();
             System.out.println("==============================");
-            System.out.println("            POKÉMON PCD ");
+            System.out.println("            POKÉMON ");
             System.out.println("==============================");
             System.out.println("1 - Novo Jogo");
             System.out.println("2 - Continuar Jogo");
@@ -56,7 +56,7 @@ public class Main {
 
                     case 6:
                         System.out.println();
-                        System.out.println("Saindo do Pokémon PCD...");
+                        System.out.println("Saindo do Pokémon...");
                         jogoRodando = false;
                         break;
 
