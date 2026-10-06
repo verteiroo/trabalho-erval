@@ -48,6 +48,10 @@ public abstract class Pokemon {
         return experiencia;
     }
 
+    public boolean estaVivo() {
+        return vida > 0;
+    }
+
     public void atacar(Pokemon alvo) {
         int dano = Math.max(1, ataque - alvo.getDefesa());
 

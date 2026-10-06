@@ -1,10 +1,13 @@
 package main;
 
 import java.util.Scanner;
+import util.GeradorInimigos;
 import model.Pokemon;
 import model.Pikachu;
 import model.Charmander;
 import model.Squirtle;
+import service.BatalhaService;
+import model.PokemonSelvagem;
 
 public class Main {
     
@@ -126,6 +129,19 @@ public class Main {
             System.out.println("Pokémon: " + pokemonEscolhido.getNome());
 
             pokemonEscolhido.mostrarStatus();
+
+            System.out.println();
+            System.out.println("Sua aventura vai começar!...");
+
+            BatalhaService batalhaService = new BatalhaService();
+
+            PokemonSelvagem inimigo = GeradorInimigos.gerarInimigo();
+
+            batalhaService.iniciarBatalha(
+                pokemonEscolhido,
+                inimigo,
+                scanner
+            );
 
             System.out.println();
             System.out.println("Pegue todos os pokémons que você conseguir!");
