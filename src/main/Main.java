@@ -2,12 +2,18 @@ package main;
 
 import java.util.Scanner;
 import util.GeradorInimigos;
+
 import model.Pokemon;
 import model.Pikachu;
 import model.Charmander;
 import model.Squirtle;
-import service.BatalhaService;
 import model.PokemonSelvagem;
+import model.Treinador;
+
+import service.BatalhaService;
+import service.JogoService;
+
+
 
 public class Main {
     
@@ -130,8 +136,21 @@ public class Main {
 
             pokemonEscolhido.mostrarStatus();
 
+            Treinador treinador = new Treinador(nomeTreinador);
+
+            treinador.adicionarPokemon(pokemonEscolhido);
+
+            System.out.println();
+            System.out.println("Seu Pokémon foi adicionado à equipe!");
+
+            treinador.mostrarEquipe();
+
             System.out.println();
             System.out.println("Sua aventura vai começar!...");
+
+            JogoService jogoService = new JogoService();
+
+            jogoService.iniciarAventura(treinador, scanner);
 
             BatalhaService batalhaService = new BatalhaService();
 

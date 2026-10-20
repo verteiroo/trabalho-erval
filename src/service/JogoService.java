@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import model.Pokemon;
 import model.PokemonSelvagem;
+import model.Treinador;
 
 import util.GeradorInimigos;
 
@@ -15,7 +16,14 @@ public class JogoService {
         batalhaService = new BatalhaService();
     }
 
-    public void iniciarAventura(Pokemon jogador, Scanner scanner) {
+    public void iniciarAventura(Treinador treinador, Scanner scanner) {
+
+        Pokemon jogador = treinador.getPokemonPrincipal();
+
+        if (jogador == null) {
+            System.out.println("O treinador não possui Pokémon!");
+            return;
+        }
 
         System.out.println();
         System.out.println("==============================");
@@ -62,5 +70,6 @@ public class JogoService {
         System.out.println("==============================");
 
         jogador.mostrarStatus();
+        treinador.mostrarEquipe();
     }
 }
