@@ -43,10 +43,10 @@ public class JogoService {
                     + inimigo.getNome()
                     + " apareceu!");
 
-            boolean venceu =
-                    batalhaService.iniciarBatalha(
+            boolean venceu = batalhaService.iniciarBatalha(
                             jogador,
                             inimigo,
+                            treinador,
                             scanner
                     );
 

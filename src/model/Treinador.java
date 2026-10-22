@@ -1,18 +1,39 @@
+
 package model;
 
 import java.util.ArrayList;
 
 public class Treinador {
+
     private String nome;
     private ArrayList<Pokemon> equipe;
+    private int pokebolas;
 
     public Treinador(String nome) {
         this.nome = nome;
         this.equipe = new ArrayList<>();
+        this.pokebolas = 5;
     }
 
     public String getNome() {
         return nome;
+    }
+
+    public int getPokebolas() {
+        return pokebolas;
+    }
+
+    public boolean usarPokebola() {
+        if (pokebolas <= 0) {
+            return false;
+        }
+
+        pokebolas--;
+        return true;
+    }
+
+    public boolean temEspacoNaEquipe() {
+        return equipe.size() < 6;
     }
 
     public boolean adicionarPokemon(Pokemon pokemon) {
@@ -20,7 +41,7 @@ public class Treinador {
             return false;
         }
 
-        if (equipe.size() >= 6) {
+        if (!temEspacoNaEquipe()) {
             System.out.println("Sua equipe está cheia!");
             return false;
         }
@@ -39,7 +60,7 @@ public class Treinador {
 
     public void mostrarEquipe() {
         System.out.println();
-        System.out.println("========== SUA EQUIPE ===========");
+        System.out.println("======= SUA EQUIPE =======");
 
         if (equipe.isEmpty()) {
             System.out.println("Sua equipe está vazia!");
@@ -58,6 +79,6 @@ public class Treinador {
             );
         }
 
-        System.out.println("==============================");
+        System.out.println("==========================");
     }
 }
