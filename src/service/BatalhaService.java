@@ -131,6 +131,8 @@ public class BatalhaService {
 
                             if (capturou) {
 
+                                treinador.adicionarPontos(10);
+
                                 System.out.println();
                                 System.out.println(
                                     "================================"
@@ -149,7 +151,6 @@ public class BatalhaService {
 
                                 treinador.mostrarEquipe();
 
-                                // A captura encerra a batalha.
                                 return true;
                             }
 
@@ -227,6 +228,7 @@ public class BatalhaService {
             );
 
             jogador.ganharExperiencia(20);
+            treinador.adicionarPontos(20);
 
             return true;
         }

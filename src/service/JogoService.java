@@ -6,11 +6,14 @@ import model.Pokemon;
 import model.PokemonSelvagem;
 import model.Treinador;
 
+import repository.RankingRepository;
+
 import util.GeradorInimigos;
 
 public class JogoService {
 
     private BatalhaService batalhaService;
+    private RankingRepository rankingRepository = new RankingRepository();
 
     public JogoService() {
         batalhaService = new BatalhaService();
@@ -52,8 +55,12 @@ public class JogoService {
 
             if (!venceu) {
 
-                System.out.println();
                 System.out.println("A aventura terminou.");
+
+                rankingRepository.salvarPontuacao(
+                    treinador.getNome(),
+                    treinador.getPontuacao()
+                );
 
                 return;
             }
@@ -68,6 +75,13 @@ public class JogoService {
         System.out.println("==============================");
         System.out.println("     AVENTURA CONCLUÍDA!");
         System.out.println("==============================");
+
+        treinador.adicionarPontos(50);
+
+        rankingRepository.salvarPontuacao(
+            treinador.getNome(),
+            treinador.getPontuacao()
+        );
 
         jogador.mostrarStatus();
         treinador.mostrarEquipe();

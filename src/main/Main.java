@@ -10,6 +10,8 @@ import model.Treinador;
 
 import service.JogoService;
 
+import repository.RankingRepository;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -50,10 +52,9 @@ public class Main {
                         break;
 
                     case 3:
-                        System.out.println();
-                        System.out.println(
-                            "O ranking ainda será desenvolvido."
-                        );
+                        RankingRepository ranking = new RankingRepository();
+
+                        ranking.mostrarRanking();
                         break;
 
                     case 4:

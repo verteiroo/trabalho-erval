@@ -9,10 +9,13 @@ public class Treinador {
     private ArrayList<Pokemon> equipe;
     private int pokebolas;
 
+    private int pontuacao;
+
     public Treinador(String nome) {
         this.nome = nome;
         this.equipe = new ArrayList<>();
         this.pokebolas = 5;
+        this.pontuacao = 0;
     }
 
     public String getNome() {
@@ -34,6 +37,16 @@ public class Treinador {
 
     public boolean temEspacoNaEquipe() {
         return equipe.size() < 6;
+    }
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void adicionarPontos(int pontos) {
+        if (pontos > 0) {
+            pontuacao += pontos;
+        }
     }
 
     public boolean adicionarPokemon(Pokemon pokemon) {
