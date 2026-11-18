@@ -45,10 +45,7 @@ public class Main {
                         break;
 
                     case 2:
-                        System.out.println();
-                        System.out.println(
-                            "O sistema de salvamento ainda será desenvolvido."
-                        );
+                        continuarJogo(scanner);
                         break;
 
                     case 3:
@@ -199,5 +196,48 @@ public class Main {
         System.out.println("5. Capture Pokémon com Pokébolas.");
         System.out.println("6. Ganhe experiência e suba de nível.");
         System.out.println("7. Monte sua equipe Pokémon.");
+    }
+
+    public static void continuarJogo(Scanner scanner) {
+
+    System.out.println();
+    System.out.println("==============================");
+    System.out.println("       CONTINUAR JOGO");
+    System.out.println("==============================");
+
+    JogoSaveRepository repositorio =
+            new JogoSaveRepository();
+
+    if (!repositorio.existeSalvamento()) {
+        System.out.println("Nenhum jogo salvo encontrado!");
+        return;
+    }
+
+    Treinador treinador = repositorio.carregar();
+
+    if (treinador == null) {
+            System.out.println("Não foi possível carregar o jogo.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("Bem-vindo de volta, "
+                + treinador.getNome() + "!");
+
+        treinador.mostrarEquipe();
+
+        System.out.println("Pontuação: "
+                + treinador.getPontuacao());
+
+        System.out.println("Pokébolas: "
+                + treinador.getPokebolas());
+
+        JogoService jogoService = new JogoService();
+
+        jogoService.iniciarAventura(
+                treinador,
+                scanner,
+                repositorio.getBatalhaSalva()
+        );
     }
 }
