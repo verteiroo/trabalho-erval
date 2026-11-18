@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
 import java.util.Properties;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.AtomicMoveNotSupportedException;
 
 import model.*;
 
@@ -76,18 +78,44 @@ public class JogoSaveRepository {
             dados.setProperty(prefixo + "nome", pokemon.getNome());
         }
 
+        Path temporario = arquivo.resolveSibling("salvamento.tmp");
+
         try {
             Files.createDirectories(arquivo.getParent());
 
             try (var writer = Files.newBufferedWriter(
-                    arquivo, StandardCharsets.UTF_8)) {
+                    temporario, StandardCharsets.UTF_8)) {
 
                 dados.store(writer, "Salvamento Pokemon PCD");
             }
 
-            return true;
+        try {
+            Files.move(
+                    temporario,
+                    arquivo,
+                    StandardCopyOption.ATOMIC_MOVE,
+                    StandardCopyOption.REPLACE_EXISTING
+            );
+
+        } catch (AtomicMoveNotSupportedException e) {
+
+            Files.move(
+                    temporario,
+                    arquivo,
+                    StandardCopyOption.REPLACE_EXISTING
+            );
+        }
+
+        return true;
 
         } catch (IOException e) {
+
+            try {
+                Files.deleteIfExists(temporario);
+            } catch (IOException erroLimpeza) {
+                System.out.println("Não foi possível limpar o arquivo temporário.");
+            }
+
             System.out.println("Erro ao salvar jogo: " + e.getMessage());
             return false;
         }
@@ -165,7 +193,7 @@ public class JogoSaveRepository {
             System.out.println("Jogo carregado com sucesso!");
             return treinador;
 
-        } catch (IOException | IllegalArgumentException e) {
+        } catch (IOException | IllegalArgumentException | NullPointerException e) {
 
             System.out.println(
                     "Erro ao carregar salvamento: " + e.getMessage());
