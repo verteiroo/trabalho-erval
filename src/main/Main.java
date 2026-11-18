@@ -9,7 +9,7 @@ import model.Squirtle;
 import model.Treinador;
 
 import service.JogoService;
-
+import repository.JogoSaveRepository;
 import repository.RankingRepository;
 
 public class Main {
@@ -161,6 +161,9 @@ public class Main {
         System.out.println();
         System.out.println("Você recebeu 5 Pokébolas!");
         System.out.println("Sua aventura vai começar!");
+
+        JogoSaveRepository repositorio = new JogoSaveRepository();
+        repositorio.salvar(treinador, 1);
 
         JogoService jogoService = new JogoService();
 
