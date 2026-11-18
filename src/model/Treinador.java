@@ -2,6 +2,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Treinador {
 
@@ -33,6 +35,15 @@ public class Treinador {
 
         pokebolas--;
         return true;
+    }
+
+    public List<Pokemon> getEquipe() {
+        return Collections.unmodifiableList(equipe);
+    }
+
+    public void restaurarRecursos(int pokebolas, int pontuacao) {
+        this.pokebolas = Math.max(0, pokebolas);
+        this.pontuacao = Math.max(0, pontuacao);
     }
 
     public boolean temEspacoNaEquipe() {

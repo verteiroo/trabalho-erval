@@ -48,6 +48,21 @@ public abstract class Pokemon {
         return experiencia;
     }
 
+    public void restaurarEstado(
+        int vida,
+        int vidaMaxima,
+        int ataque,
+        int defesa,
+        int nivel,
+        int experiencia) {
+            this.vidaMaxima = Math.max(1, vidaMaxima);
+            this.vida = Math.max(0, Math.min(vida, this.vidaMaxima));
+            this.ataque = Math.max(1, ataque);
+            this.defesa = Math.max(0, defesa);
+            this.nivel = Math.max(1, nivel);
+            this.experiencia = Math.max(0, experiencia);
+        }
+
     public boolean estaVivo() {
         return vida > 0;
     }
